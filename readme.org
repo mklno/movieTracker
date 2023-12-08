@@ -1,0 +1,7 @@
+#+TITLE: Movie Tracker
+#+AUTHOR: Manoprasanth MATHAVAN
+
+* Idea
+Track the movies I watch
+
+
