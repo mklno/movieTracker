@@ -1,8 +1,10 @@
-#+TITLE: Movie Tracker
+#+Title: Movie Tracker
 #+AUTHOR: mklno
-
+#+STARTUP: inlineimages
 ** Idea
-I used letterboxd to track my movies. So, thought of making a simple python scipt to tracking the movies.
+I used letterboxd to track my movies. Its kind of bloated and doesn't allow me to view the images. So, thought of making a simple python scipt to track the movies which does the same.
 
-
-
+** Working
+[[file:assets/one.png]]
+[[file:assets/two.png]]
+[[file:/assets/three.png]]
