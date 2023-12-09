@@ -9,25 +9,17 @@ from assets import movieTracker
 # loading env
 load_dotenv()
 
-# functionality
-url = "https://api.themoviedb.org/3/search/movie?query=sarpatta&include_adult=false&language=en-US&page=1"
-
-headers = {
-    "accept": "application/json",
-    "Authorization": os.environ.get("APITOKEN")
-}
-
-response = requests.get(url, headers=headers)
-jsonData = json.loads(response.text)
-for item in jsonData["results"]:
-    print(item["id"])
-
 # create db    
 connection = sqlite3.connect("tracker.db")
 cur = connection.cursor()
-# table created
-# cur.execute("CREATE TABLE movies(Movie, Director, Date, Rating)")
 
+# check if table exists else create
+table = cur.execute(
+  """SELECT name FROM sqlite_master WHERE type='table' 
+  AND name='movies'; """).fetchall()
+if table == []:
+    cur.execute("CREATE TABLE movies(Movie, Director, Date, Rating)")
+    
 # update db
 # cur.execute("""
 # INSERT INTO movies VALUES
@@ -37,11 +29,36 @@ cur = connection.cursor()
 
 # search for a movie
 def searchMovie():
+#     movieName = input("Enter the Movie name: ")
+#     url = f"https://api.themoviedb.org/3/search/movie?query={movieName}&include_adult=false&language=en-US&page=1"
+
+#     headers = {
+#     "accept": "application/json",
+#     "Authorization": os.environ.get("APITOKEN")
+# }
+
+#     response = requests.get(url, headers=headers)
+#     jsonData = json.loads(response.text)
+#     for item in jsonData["results"]:
     pass
 
+        
 # add an entry in the tracker
 def addMovie():
-    pass
+    movieName = input("Enter the Movie: ")
+    director = input("Enter the Director: ")
+    date = input("When did you watch the movie? (dd/mm/yyyy) ")
+    rating = input("How do you rate the movie? (*****) ")
+
+    # Using parameterized queries to avoid SQL injection
+    cur.execute(
+        """
+        INSERT INTO movies (Movie, Director, Date, Rating)
+        VALUES (?, ?, ?, ?)
+        """,
+        (movieName, director, date, rating)
+    )
+    connection.commit()
 
 # print the movies in the terminal
 def printMovies():
