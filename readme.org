@@ -1,8 +1,8 @@
 #+TITLE: Movie Tracker
-#+AUTHOR: Manoprasanth MATHAVAN
+#+AUTHOR: mklno
 
-* Idea
-Track the movies I watch
+** Idea
+I used letterboxd to track my movies. So, thought of making a simple python scipt to tracking the movies.
 
 
 
